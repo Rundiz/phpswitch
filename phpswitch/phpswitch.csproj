@@ -55,6 +55,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="LICENSE" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
