@@ -33,7 +33,7 @@ Each PHP versions folder must contain the files that you have downloaded from [p
 
 ##### php-running folder
 The **php-running** folder is required to make PHP works (CLI and web server).<br>
-If you want to access `php` executable file, please add path to this folder into your system variable **Path**.<br>
+If you want to access `php` executable file, please add path to this folder into your **System variables** > **Path**.<br>
 To do this, run `rundll32.exe sysdm.cpl,EditEnvironmentVariables` in the command line. Edit **Path** in **System variables** and then add the path to **php-running** folder.
 
 #### Apache folder
@@ -78,6 +78,8 @@ Put all these folders together for easily to use the command.
 	* php-running
 * phpswitch
 	* phpswitch.exe
+
+To run `phpswitch` from anywhere, please add the path to **phpswitch** folder to your **System variables** > **Path**.
 
 ## Usage:
 Run `phpswitch` command and follow with version number. Example: `phpswitch 7.1` to switch to PHP 7.1.
