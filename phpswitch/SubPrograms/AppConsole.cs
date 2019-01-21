@@ -36,6 +36,9 @@ namespace phpswitch.SubPrograms
             Console.WriteLine("Available options:");
             Console.WriteLine("[<PHP versions folder>] The folder that contain PHP versions for switch to. This folder must contain \"php-running\" folder in it.");
             Console.WriteLine("[<Apache folder>] The folder of installed Apache. This folder must contain \"conf\", \"bin\" folders in it.");
+            Console.WriteLine();
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
 
 
