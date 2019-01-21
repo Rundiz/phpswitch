@@ -13,7 +13,7 @@ Administrator privilege (Windows UAC).
 #### PHP versions folder
 There is one folder that contain multiple PHP versions and this is required. This folder will be called **PHP versions folder**.
 
-The **PHP versions folder** structor must follow this guide line.
+The **PHP versions folder** structure must follow this guide line.
 
 * php *(Assume that this is PHP versions folder)*.
 	* php5.5 *(No need to be same version but keep the version number after the text "php" in lower case, no space)*
@@ -39,7 +39,7 @@ To do this, run `rundll32.exe sysdm.cpl,EditEnvironmentVariables` in the command
 #### Apache folder
 Another one is the folder that contain Apache but this is optional for who is using Apache only. This folder will be called **Apache folder**.
 
-The **Apache folder** structor must follow this guide line.
+The **Apache folder** structure must follow this guide line.
 
 * Apache24 *24 represent Apache v2.4*
 	* bin
