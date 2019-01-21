@@ -54,6 +54,7 @@
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
+    <None Include="LICENSE" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
