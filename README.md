@@ -27,7 +27,7 @@ The **PHP versions folder** structor must follow this guide line.
      * php7.0
      * php7.1
      * *... & more.*
-	 * php-running
+	 * php-running *(Required folder)*
 
 Each PHP versions folder must contain the files that you have downloaded from [php.net](https://php.net).
 
@@ -75,6 +75,7 @@ Put all these folders together for easily to use the command.
 	* php5.6
 	* php7.0
 	* *... & more.*
+	* php-running
 * phpswitch
 	* phpswitch.exe
 
