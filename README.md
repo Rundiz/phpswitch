@@ -27,8 +27,13 @@ The **PHP versions folder** structor must follow this guide line.
      * php7.0
      * php7.1
      * *... & more.*
+	 * php-running
 
 Each PHP versions folder must contain the files that you have downloaded from [php.net](https://php.net).
+
+The **php-running** folder is required to make PHP works (CLI and web server).<br>
+If you want to access `php` executable file, please add path to this folder into your system variable **Path**.<br>
+To do this, run `rundll32.exe sysdm.cpl,EditEnvironmentVariables` in the command line. Edit **Path** in **System variables** and then add the path to **php-running** folder.
 
 #### Apache folder
 Another one is the folder that contain Apache but this is optional for who is using Apache only. This folder will be called **Apache folder**.
