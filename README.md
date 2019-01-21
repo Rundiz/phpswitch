@@ -3,8 +3,8 @@
 Switch between PHP versions using command line on Windows.
 
 ## Requirement:
-Windows (I'm not sure that 7, 8, or 10 at least) 64 bit.
-.NET Framework 4.6.1
+Windows (I'm not sure that 7, 8, or 10 at least) 64 bit.<br>
+.NET Framework 4.6.1<br>
 Administrator privilege (Windows UAC).
 
 ## Installation
