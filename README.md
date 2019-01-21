@@ -9,3 +9,5 @@ Administrator privilege (Windows UAC).
 
 ## Usage:
 Run `phpswitch` command and follow with version number. Example: `phpswitch 7.1` to switch to PHP 7.1.
+
+![PHPSwitch](.web-assets/phpswitch0.1-screenshot-01.jpg)
