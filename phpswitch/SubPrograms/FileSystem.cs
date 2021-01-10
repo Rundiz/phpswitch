@@ -52,21 +52,24 @@ namespace phpswitch.SubPrograms
         public void ValidateRequiredPath()
         {
             // validate that selected php folder is existing. -------------
-            string lastPhpDirChar = this.phpDir.Substring(this.phpDir.Length - 1);
-            if (lastPhpDirChar == "\"")
+            if (String.IsNullOrEmpty(this.phpDir) == false)
             {
-                AppConsole.ErrorMessage("Do not enter <PHP versions folder> with trailing slash.");
-                System.Threading.Thread.Sleep(5000);
-                Environment.Exit(1);
-                return;
-            }
+                string lastPhpDirChar = this.phpDir.Substring(this.phpDir.Length - 1);
+                if (lastPhpDirChar == "\"")
+                {
+                    AppConsole.ErrorMessage("Do not enter <PHP versions folder> with trailing slash.");
+                    System.Threading.Thread.Sleep(5000);
+                    Environment.Exit(1);
+                    return;
+                }
 
-            if (Directory.Exists(this.phpDir) == false)
-            {
-                AppConsole.ErrorMessage("The <PHP versions folder> is not exists. (" + this.phpDir + ")");
-                System.Threading.Thread.Sleep(5000);
-                Environment.Exit(1);
-                return;
+                if (Directory.Exists(this.phpDir) == false)
+                {
+                    AppConsole.ErrorMessage("The <PHP versions folder> is not exists. (" + this.phpDir + ")");
+                    System.Threading.Thread.Sleep(5000);
+                    Environment.Exit(1);
+                    return;
+                }
             }
             // end validate that selected php folder is existing. ---------
 

@@ -37,24 +37,27 @@ namespace phpswitch.SubPrograms.WebServer
         public void ValidateRequiredPath()
         {
             // validate that selected apache folder is existing. -------------------------
-            string lastApacheDirChar = this.apacheDir.Substring(this.apacheDir.Length - 1);
-            if (lastApacheDirChar == "\"")
+            if (String.IsNullOrEmpty(this.apacheDir) == false)
             {
-                AppConsole.ErrorMessage("Do not enter Apache folder with trailing slash.");
-                System.Threading.Thread.Sleep(5000);
-                Environment.Exit(1);
-                return;
-            }
+                string lastApacheDirChar = this.apacheDir.Substring(this.apacheDir.Length - 1);
+                if (lastApacheDirChar == "\"")
+                {
+                    AppConsole.ErrorMessage("Do not enter Apache folder with trailing slash.");
+                    System.Threading.Thread.Sleep(5000);
+                    Environment.Exit(1);
+                    return;
+                }
 
-            if (Directory.Exists(this.apacheDir) == false)
-            {
-                AppConsole.ErrorMessage("The Apache folder is not exists. (" + this.apacheDir + ")");
-                System.Threading.Thread.Sleep(5000);
-                Environment.Exit(1);
-                return;
-            }
+                if (Directory.Exists(this.apacheDir) == false)
+                {
+                    AppConsole.ErrorMessage("The Apache folder is not exists. (" + this.apacheDir + ")");
+                    System.Threading.Thread.Sleep(5000);
+                    Environment.Exit(1);
+                    return;
+                }
 
-            this.apacheDir = Fs.ApacheDir;
+                this.apacheDir = Fs.ApacheDir;
+            }
             // end validate that selected apache folder is existing. ---------------------
 
             if (Fs.IsApacheFolderExists() == false)
