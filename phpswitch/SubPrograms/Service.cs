@@ -54,8 +54,7 @@ namespace phpswitch.SubPrograms
                             eachService.WaitForStatus(ServiceControllerStatus.Running);
                             AppConsole.ClearCurrentConsoleLine();
                             Console.WriteLine("The " + eachService.ServiceName + " service is now {0}.", eachService.Status.ToString().ToLower());
-                        }
-                        catch (InvalidOperationException)
+                        } catch (InvalidOperationException)
                         {
                             AppConsole.ClearCurrentConsoleLine();
                             Console.ForegroundColor = ConsoleColor.Red;
@@ -98,8 +97,7 @@ namespace phpswitch.SubPrograms
                             eachService.WaitForStatus(ServiceControllerStatus.Stopped);
                             AppConsole.ClearCurrentConsoleLine();
                             Console.WriteLine("The " + eachService.ServiceName + " service is now {0}.", eachService.Status.ToString().ToLower());
-                        }
-                        catch (InvalidOperationException)
+                        } catch (InvalidOperationException)
                         {
                             AppConsole.ClearCurrentConsoleLine();
                             Console.ForegroundColor = ConsoleColor.Red;

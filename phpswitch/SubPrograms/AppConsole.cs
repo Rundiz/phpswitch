@@ -15,7 +15,9 @@ namespace phpswitch.SubPrograms
             int currentLineCursor = Console.CursorTop;
             Console.SetCursorPosition(0, Console.CursorTop - 1);
             for (int i = 0; i < Console.WindowWidth; i++)
+            {
                 Console.Write(" ");
+            }
             Console.SetCursorPosition(0, currentLineCursor - 1);
         }
 

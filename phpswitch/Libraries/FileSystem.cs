@@ -26,8 +26,7 @@ namespace phpswitch.Libraries
                     // Current path was copied from https://stackoverflow.com/a/32339322/128761 .
                     string parentDir = Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).ToString();
                     return this.NormalizePath(parentDir + "/apache/Apache24");
-                }
-                else
+                } else
                 {
                     return this.NormalizePath(this.apacheDir);
                 }
@@ -197,9 +196,17 @@ namespace phpswitch.Libraries
          */
         public string NormalizePath(string path)
         {
+            char[] charsToTrim = { '\'', '"', ' ' };
+            path = path.Trim(charsToTrim);
+
             return Path
-                .GetFullPath(new Uri(path).LocalPath)
-                .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                .GetFullPath(
+                    new Uri(path).LocalPath
+                )
+                .TrimEnd(
+                    Path.DirectorySeparatorChar, 
+                    Path.AltDirectorySeparatorChar
+                );
         }
 
 
