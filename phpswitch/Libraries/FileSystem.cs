@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -187,6 +188,17 @@ namespace phpswitch.Libraries
             }
 
             return Directory.Exists(this.NormalizePath(this.PhpDir + "/php" + version));
+        }
+
+
+        /**
+         * <summary>Load JSON file to object.</summary>
+         */
+        public Libraries.PhpSwitchJSO loadJSON(string jsonFile)
+        {
+            string json = File.ReadAllText(jsonFile);
+            Libraries.PhpSwitchJSO deserialized = JsonConvert.DeserializeObject<Libraries.PhpSwitchJSO>(json);
+            return deserialized;
         }
 
 
