@@ -8,6 +8,9 @@ namespace phpswitch.SubPrograms.WebServer
     {
 
 
+        private string apacheDir;
+
+
         private static Libraries.FileSystem Fs;
 
 
@@ -22,6 +25,7 @@ namespace phpswitch.SubPrograms.WebServer
 
             if (apacheDir != "")
             {
+                this.apacheDir = apacheDir;
                 Fs.ApacheDir = apacheDir;
             }
         }
@@ -30,8 +34,29 @@ namespace phpswitch.SubPrograms.WebServer
         /**
          * <summary>Validate required folders. Exit the program if not found.</summary>
          */
-        public static void ValidateRequiredPath()
+        public void ValidateRequiredPath()
         {
+            // validate that selected apache folder is existing. -------------------------
+            string lastApacheDirChar = this.apacheDir.Substring(this.apacheDir.Length - 1);
+            if (lastApacheDirChar == "\"")
+            {
+                AppConsole.ErrorMessage("Do not enter Apache folder with trailing slash.");
+                System.Threading.Thread.Sleep(5000);
+                Environment.Exit(1);
+                return;
+            }
+
+            if (Directory.Exists(this.apacheDir) == false)
+            {
+                AppConsole.ErrorMessage("The Apache folder is not exists. (" + this.apacheDir + ")");
+                System.Threading.Thread.Sleep(5000);
+                Environment.Exit(1);
+                return;
+            }
+
+            this.apacheDir = Fs.ApacheDir;
+            // end validate that selected apache folder is existing. ---------------------
+
             if (Fs.IsApacheFolderExists() == false)
             {
                 AppConsole.ErrorMessage("Error! The Apache config folder or required folders, file for Apache configuration is not exists. (" + Fs.ApacheDir + ")");
