@@ -54,15 +54,22 @@ namespace phpswitch
                 string apacheDir = "";
                 if (args.Length >= 2)
                 {
-                    // if php versions folder was specified.
+                    // if php versions folder was specified from command line.
                     // set php folder path.
                     phpDir = args[1];
                 }
                 if (args.Length >= 3)
                 {
-                    // if apache folder was specified.
+                    // if apache folder was specified from command line.
                     // set apache folder path.
                     apacheDir = args[2];
+                }
+                if (String.IsNullOrEmpty(phpDir) && String.IsNullOrEmpty(apacheDir) && File.Exists(runningDir + Path.DirectorySeparatorChar + "phpswitch.json"))
+                {
+                    Libraries.FileSystem LibFs = new Libraries.FileSystem();
+                    Libraries.PhpSwitchJSO phpSwitchJson = LibFs.loadJSON(runningDir + Path.DirectorySeparatorChar + "phpswitch.json");
+                    phpDir = phpSwitchJson.phpVersionsDir;
+                    apacheDir = phpSwitchJson.apacheDir;
                 }
                 FileSystem Fs = new FileSystem(args[0], phpDir, apacheDir);
 
