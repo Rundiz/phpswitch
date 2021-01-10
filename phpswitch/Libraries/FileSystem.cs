@@ -196,7 +196,12 @@ namespace phpswitch.Libraries
          */
         public string NormalizePath(string path)
         {
-            char[] charsToTrim = { '\'', '"', ' ' };
+            if (String.IsNullOrEmpty(path))
+            {
+                return path;
+            }
+
+            char[] charsToTrim = { ' ', '"', '\'' };
             path = path.Trim(charsToTrim);
 
             return Path
