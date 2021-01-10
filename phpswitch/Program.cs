@@ -32,8 +32,7 @@ namespace phpswitch
                 WindowsIdentity user = WindowsIdentity.GetCurrent();
                 WindowsPrincipal principal = new WindowsPrincipal(user);
                 return principal.IsInRole(WindowsBuiltInRole.Administrator);
-            }
-            catch
+            } catch
             {
                 return false;
             }
@@ -50,6 +49,7 @@ namespace phpswitch
             } else
             {
                 // if running the code.
+                string runningDir = Directory.GetCurrentDirectory();// directory where this application is running from.
                 string phpDir = "";
                 string apacheDir = "";
                 if (args.Length >= 2)
@@ -83,7 +83,7 @@ namespace phpswitch
                 // end check if running as admin.
 
                 // validate required folders.
-                FileSystem.ValidateRequiredPath();
+                Fs.ValidateRequiredPath();
 
                 // stop web server service.
                 Service.StopWebServerService();
@@ -136,8 +136,7 @@ namespace phpswitch
             {
                 Process.Start(Proc);
                 Environment.Exit(0);
-            }
-            catch
+            } catch
             {
                 throw new Exception("Unable to raise the administrator privilege.");
             }
