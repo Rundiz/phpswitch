@@ -5,12 +5,28 @@
   "apacheUpdateConfig": true,
   "additionalCopy": {
     "7.0": [
-      [ "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin\\CORE_*.dll", "." ],
-      [ "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin\\IM_*.dll", "." ]
+      {
+        "copyFromDir": "D:\\my-work-spaces\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
+        "searchPattern": "CORE_*.dll",
+        "copyTo": "."
+      },
+      {
+        "copyFromDir": "D:\\my-work-spaces\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
+        "searchPattern": "IM_*.dll",
+        "copyTo": "."
+      }
     ],
     "7.1": [
-      [ "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin\\CORE_*.dll", "." ],
-      [ "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin\\IM_*.dll", "." ]
+      {
+        "copyFromDir": "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
+        "searchPattern": "CORE_*.dll",
+        "copyTo": "."
+      },
+      {
+        "copyFromDir": "D:\\my-work-spaces\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
+        "searchPattern": "IM_*.dll",
+        "copyTo": "."
+      }
     ]
   },
   "_comment": "Copy and paste this file into the folder you want to run the `phpswitch` command. Modify path above to your real path. Then run the `phpswitch` command without php and apache arguments."

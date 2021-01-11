@@ -22,6 +22,39 @@ namespace phpswitch.Libraries
 
 
         /**
+         * <summary>Copy additional folders and files.</summary>
+         */
+        public void CopyAdditional(string copyFrom, string searchPattern, string copyTo)
+        {
+            int copyCount = 0;
+            if (Directory.Exists(copyFrom))
+            {
+                // create folders on target.
+                foreach (string dirPath in Directory.GetDirectories(copyFrom, searchPattern, SearchOption.AllDirectories))
+                {
+                    string relDirPath = dirPath.Replace(copyFrom, "");
+                    char[] charsToTrim = { ' ', '"', '\'', '/', '\\' };
+                    relDirPath = relDirPath.Trim(charsToTrim);
+                    Directory.CreateDirectory(NormalizePath(copyTo) + Path.DirectorySeparatorChar + relDirPath);
+                    copyCount++;
+                }
+
+                // copy all files to target.
+                foreach (string filePath in Directory.GetFiles(copyFrom, searchPattern, SearchOption.AllDirectories))
+                {
+                    string relFilePath = filePath.Replace(copyFrom, "");
+                    char[] charsToTrim = { ' ', '"', '\'', '/', '\\' };
+                    relFilePath = relFilePath.Trim(charsToTrim);
+                    File.Copy(filePath, NormalizePath(copyTo) + Path.DirectorySeparatorChar + relFilePath, false);
+                    copyCount++;
+                }
+            }
+
+            Console.WriteLine("  Total {0} folders and files were copied.", copyCount);
+        }
+
+
+        /**
          * <summary>Copy files and folders from source to target.</summary>
          * <remarks>Copied from https://stackoverflow.com/a/3822913/128761 .</remarks>
          * <param name="phpVersion">The PHP version number. (7.3, 7.4, x.x)</param>

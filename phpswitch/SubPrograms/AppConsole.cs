@@ -29,7 +29,7 @@ namespace phpswitch.SubPrograms
         {
             Console.WriteLine("Usage: phpswitch <PHP version> [<PHP versions folder>] [<Apache folder>]");
             Console.WriteLine("");
-            Console.WriteLine("The <PHP version> is version number of PHP that exists in the folder. Example: 7.0 for PHP v7.0.");
+            Console.WriteLine("The <PHP version> is version number of PHP that exists in the folder. Example: 8.0 for PHP v8.0.");
             Console.WriteLine("");
             Console.WriteLine("Available options:");
             Console.WriteLine("[<PHP versions folder>] The folder that contain PHP versions for switch to. This folder must contain \"php-running\" folder in it.");

@@ -58,7 +58,7 @@ namespace phpswitch.SubPrograms.WebServer
 
             if (LibFs.IsApacheFolderExists() == false)
             {
-                AppConsole.ErrorMessage("Error! The Apache config folder or required folders, file for Apache configuration is not exists. (" + MPhpSwitchConfig.apacheDir + ")");
+                AppConsole.ErrorMessage("Error! The Apache required folders such as 'conf' is not exists. (" + MPhpSwitchConfig.apacheDir + ")");
                 System.Threading.Thread.Sleep(5000);
                 Environment.Exit(1);
                 return;

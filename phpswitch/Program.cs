@@ -90,6 +90,7 @@ namespace phpswitch
                     if (phpSwitchJson.phpVersionsDir != null)
                     {
                         Console.WriteLine("Found phpswitch.json file, it is now using configuration from this file.");
+                        Console.WriteLine(phpSwitchConfig.runningDir + Path.DirectorySeparatorChar + "phpswitch.json");
                         Console.WriteLine();
                         phpSwitchConfig.phpDir = phpSwitchJson.phpVersionsDir;
                     }
