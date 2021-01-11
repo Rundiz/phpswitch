@@ -9,67 +9,27 @@ namespace phpswitch.Libraries
     {
 
 
-        private string apacheDir;
-
-
-        private string phpDir;
+        private Models.PhpSwitchConfig MPhpSwitchConfig;
 
 
         /**
-         * <summary>Get or set Apache folder</summary>
+         * <summary>File system class constructor</summary>
          */
-        public string ApacheDir
+        public FileSystem(Models.PhpSwitchConfig PhpSwitchConfig)
         {
-            get
-            {
-                if (apacheDir == null)
-                {
-                    // Current path was copied from https://stackoverflow.com/a/32339322/128761 .
-                    string parentDir = Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).ToString();
-                    return this.NormalizePath(parentDir + "/apache/Apache24");
-                } else
-                {
-                    return this.NormalizePath(this.apacheDir);
-                }
-            }
-            set
-            {
-                this.apacheDir = value;
-            }
-        }
-
-
-        /**
-         * <summary>Get or set PHP folder</summary>
-         */
-        public string PhpDir
-        {
-            get {
-                if (phpDir == null)
-                {
-                    // Current path was copied from https://stackoverflow.com/a/32339322/128761 .
-                    string parentDir = Directory.GetParent(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)).ToString();
-                    return this.NormalizePath(parentDir + "/php");
-                } else
-                {
-                    return this.NormalizePath(this.phpDir);
-                }
-            }
-            set {
-                this.phpDir = value;
-            }
+            MPhpSwitchConfig = PhpSwitchConfig;
         }
 
 
         /**
          * <summary>Copy files and folders from source to target.</summary>
          * <remarks>Copied from https://stackoverflow.com/a/3822913/128761 .</remarks>
-         * <param name="phpVersion">The PHP version number. (5.5, 5.6, x.x)</param>
+         * <param name="phpVersion">The PHP version number. (7.3, 7.4, x.x)</param>
          */
-        public void CopyFolder(string phpVersion)
+        public void CopyPHPFolder(string phpVersion)
         {
-            string sourcePath = this.NormalizePath(this.PhpDir + "/php" + phpVersion);
-            string destinationPath = this.NormalizePath(this.PhpDir + "/php-running");
+            string sourcePath = this.NormalizePath(MPhpSwitchConfig.phpDir + "/php" + phpVersion);
+            string destinationPath = this.NormalizePath(MPhpSwitchConfig.phpDir + "/php-running");
 
             //Now Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
@@ -88,14 +48,14 @@ namespace phpswitch.Libraries
          * <summary>Delete contents in "php-running" folder.</summary>
          * <remarks>Copied from https://stackoverflow.com/a/1288747/128761 .</remarks>
          */
-        public bool DeletePhpRunning()
+        public bool DeletePHPRunning()
         {
             if (this.IsPhpRunningFolderExists() == false)
             {
                 return false;
             }
 
-            DirectoryInfo Di = new DirectoryInfo(this.NormalizePath(this.PhpDir + "/php-running"));
+            DirectoryInfo Di = new DirectoryInfo(this.NormalizePath(MPhpSwitchConfig.phpDir + "/php-running"));
 
             foreach (FileInfo file in Di.EnumerateFiles())
             {
@@ -115,17 +75,17 @@ namespace phpswitch.Libraries
          */
         public bool IsApacheConfigFileExists(string phpVersion)
         {
-            if (this.ApacheDir == null)
+            if (MPhpSwitchConfig.apacheDir == null)
             {
                 return false;
             }
 
-            if (File.Exists(this.NormalizePath(this.ApacheDir + "/conf/extra/httpd-php.conf")) == false)
+            if (File.Exists(this.NormalizePath(MPhpSwitchConfig.apacheDir + "/conf/extra/httpd-php.conf")) == false)
             {
                 return false;
             }
 
-            if (File.Exists(this.NormalizePath(this.ApacheDir + "/conf/extra/httpd-php-" + phpVersion + ".conf")) == false)
+            if (File.Exists(this.NormalizePath(MPhpSwitchConfig.apacheDir + "/conf/extra/httpd-php-" + phpVersion + ".conf")) == false)
             {
                 return false;
             }
@@ -139,22 +99,17 @@ namespace phpswitch.Libraries
          */
         public bool IsApacheFolderExists()
         {
-            if (this.ApacheDir == null)
+            if (MPhpSwitchConfig.apacheDir == null)
             {
                 return false;
             }
 
-            if (Directory.Exists(this.NormalizePath(this.ApacheDir + "/conf")) == false)
+            if (Directory.Exists(this.NormalizePath(MPhpSwitchConfig.apacheDir + "/conf")) == false)
             {
                 return false;
             }
 
-            if (Directory.Exists(this.NormalizePath(this.ApacheDir + "/conf/extra")) == false)
-            {
-                return false;
-            }
-
-            if (File.Exists(this.NormalizePath(this.ApacheDir + "/conf/extra/httpd-php.conf")) == false)
+            if (Directory.Exists(this.NormalizePath(MPhpSwitchConfig.apacheDir + "/conf/extra")) == false)
             {
                 return false;
             }
@@ -168,36 +123,36 @@ namespace phpswitch.Libraries
          */
         public bool IsPhpRunningFolderExists()
         {
-            if (this.PhpDir == null)
+            if (MPhpSwitchConfig.phpDir == null)
             {
                 return false;
             }
 
-            return Directory.Exists(this.NormalizePath(this.PhpDir + "/php-running"));
+            return Directory.Exists(this.NormalizePath(MPhpSwitchConfig.phpDir + "/php-running"));
         }
 
 
         /**
-         * <summary>Check that "phpx.x" folder exists. The "x.x" is version number.</summary>
+         * <summary>Check that "phpx.x" folder exists, where "x.x" is version number.</summary>
          */
         public bool IsPhpVersionExists(string version)
         {
-            if (this.PhpDir == null)
+            if (MPhpSwitchConfig.phpDir == null)
             {
                 return false;
             }
 
-            return Directory.Exists(this.NormalizePath(this.PhpDir + "/php" + version));
+            return Directory.Exists(this.NormalizePath(MPhpSwitchConfig.phpDir + "/php" + version));
         }
 
 
         /**
          * <summary>Load JSON file to object.</summary>
          */
-        public Libraries.PhpSwitchJSO loadJSON(string jsonFile)
+        public Models.PhpSwitchJSO loadJSON(string jsonFile)
         {
             string json = File.ReadAllText(jsonFile);
-            Libraries.PhpSwitchJSO deserialized = JsonConvert.DeserializeObject<Libraries.PhpSwitchJSO>(json);
+            Models.PhpSwitchJSO deserialized = JsonConvert.DeserializeObject<Models.PhpSwitchJSO>(json);
             return deserialized;
         }
 

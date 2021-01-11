@@ -27,20 +27,28 @@ namespace phpswitch.SubPrograms
          */
         public static void DisplayHelp()
         {
-            //Console.ForegroundColor = ConsoleColor.Blue;
-            //Console.BackgroundColor = ConsoleColor.White;
-            Console.WriteLine("PHPSwitch.");
-            //Console.ResetColor();
             Console.WriteLine("Usage: phpswitch <PHP version> [<PHP versions folder>] [<Apache folder>]");
             Console.WriteLine("");
             Console.WriteLine("The <PHP version> is version number of PHP that exists in the folder. Example: 7.0 for PHP v7.0.");
             Console.WriteLine("");
             Console.WriteLine("Available options:");
             Console.WriteLine("[<PHP versions folder>] The folder that contain PHP versions for switch to. This folder must contain \"php-running\" folder in it.");
-            Console.WriteLine("[<Apache folder>] The folder of installed Apache. This folder must contain \"conf\", \"bin\" folders in it.");
+            Console.WriteLine("[<Apache folder>] The folder of installed Apache. This folder must contain \"conf\", \"bin\" folders in it. Leave this option empty if you don't use web server.");
             Console.WriteLine();
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
+        }
+
+
+        /**
+         * <summary>Display program header.</summary>
+         */
+        public static void DisplayProgramHeader()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.WriteLine("PHPSwitch.");
+            Console.ResetColor();
         }
 
 

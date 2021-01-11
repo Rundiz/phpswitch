@@ -10,7 +10,7 @@ using System.Threading.Tasks;
  */
 
 
-namespace phpswitch.Libraries
+namespace phpswitch.Models
 {
     class PhpSwitchJSO
     {
@@ -30,11 +30,25 @@ namespace phpswitch.Libraries
         }
 
 
+        public bool apacheUpdateConfig
+        {
+            get;
+            set;
+        } = true;
+
+
         public string phpVersionsDir
         {
             get;
             set;
         }
+
+
+        public string webserverServiceName
+        {
+            get;
+            set;
+        } = "apache";
 
 
     }

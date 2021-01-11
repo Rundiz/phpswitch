@@ -1,6 +1,8 @@
 {
   "phpVersionsDir": "D:\\wwwserver-x64\\php",
+  "webserverServiceName": "apache",
   "apacheDir": "D:\\wwwserver-x64\\apache\\Apache24",
+  "apacheUpdateConfig": true,
   "additionalCopy": {
     "7.0": [
       [ "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin\\CORE_*.dll", "." ],

@@ -8,26 +8,17 @@ namespace phpswitch.SubPrograms.WebServer
     {
 
 
-        private string apacheDir;
+        private Models.PhpSwitchConfig MPhpSwitchConfig;
 
 
-        private static Libraries.FileSystem Fs;
+        private static Libraries.FileSystem LibFs;
 
 
-        private static string phpVersion;
-
-
-        public Apache(string phpVersion, string apacheDir = "")
+        public Apache(Models.PhpSwitchConfig PhpSwitchConfig)
         {
-            Fs = new Libraries.FileSystem();
+            LibFs = new Libraries.FileSystem(PhpSwitchConfig);
 
-            Apache.phpVersion = phpVersion;
-
-            if (apacheDir != "")
-            {
-                this.apacheDir = apacheDir;
-                Fs.ApacheDir = apacheDir;
-            }
+            MPhpSwitchConfig = PhpSwitchConfig;
         }
 
 
@@ -37,9 +28,16 @@ namespace phpswitch.SubPrograms.WebServer
         public void ValidateRequiredPath()
         {
             // validate that selected apache folder is existing. -------------------------
-            if (String.IsNullOrEmpty(this.apacheDir) == false)
+            if (String.IsNullOrEmpty(MPhpSwitchConfig.apacheDir) == true)
             {
-                string lastApacheDirChar = this.apacheDir.Substring(this.apacheDir.Length - 1);
+                // if apacheDir config value is empty.
+                // set it based from running directory.
+                MPhpSwitchConfig.apacheDir = MPhpSwitchConfig.runningDir + Path.DirectorySeparatorChar + "apache";
+            }
+
+            if (String.IsNullOrEmpty(MPhpSwitchConfig.apacheDir) == false)
+            {
+                string lastApacheDirChar = MPhpSwitchConfig.apacheDir.Substring(MPhpSwitchConfig.apacheDir.Length - 1);
                 if (lastApacheDirChar == "\"")
                 {
                     AppConsole.ErrorMessage("Do not enter Apache folder with trailing slash.");
@@ -48,29 +46,27 @@ namespace phpswitch.SubPrograms.WebServer
                     return;
                 }
 
-                if (Directory.Exists(this.apacheDir) == false)
+                if (Directory.Exists(MPhpSwitchConfig.apacheDir) == false)
                 {
-                    AppConsole.ErrorMessage("The Apache folder is not exists. (" + this.apacheDir + ")");
+                    AppConsole.ErrorMessage("The Apache folder is not exists. (" + MPhpSwitchConfig.apacheDir + ")");
                     System.Threading.Thread.Sleep(5000);
                     Environment.Exit(1);
                     return;
                 }
-
-                this.apacheDir = Fs.ApacheDir;
             }
             // end validate that selected apache folder is existing. ---------------------
 
-            if (Fs.IsApacheFolderExists() == false)
+            if (LibFs.IsApacheFolderExists() == false)
             {
-                AppConsole.ErrorMessage("Error! The Apache config folder or required folders, file for Apache configuration is not exists. (" + Fs.ApacheDir + ")");
+                AppConsole.ErrorMessage("Error! The Apache config folder or required folders, file for Apache configuration is not exists. (" + MPhpSwitchConfig.apacheDir + ")");
                 System.Threading.Thread.Sleep(5000);
                 Environment.Exit(1);
                 return;
             }
 
-            if (Fs.IsApacheConfigFileExists(Apache.phpVersion) == false)
+            if (LibFs.IsApacheConfigFileExists(MPhpSwitchConfig.phpVersion) == false)
             {
-                AppConsole.ErrorMessage("Error! The Apache config file for specific PHP version is not exists. (conf/extra/httpd-php-" + Apache.phpVersion + ".conf)");
+                AppConsole.ErrorMessage("Error! The Apache config file for specific PHP version is not exists. (conf/extra/httpd-php-" + MPhpSwitchConfig.phpVersion + ".conf)");
                 System.Threading.Thread.Sleep(5000);
                 Environment.Exit(1);
                 return;
@@ -81,15 +77,15 @@ namespace phpswitch.SubPrograms.WebServer
         /**
          * <summary>Write Apache config file.</summary>
          */
-        public static void WriteConfig()
+        public void WriteConfig()
         {
             Console.WriteLine("Changing PHP version in Apache.");
 
-            string configPath = Fs.NormalizePath(Fs.ApacheDir + "/conf/extra/httpd-php.conf");
-            string configPhpVersion = "Include conf/extra/httpd-php-" + Apache.phpVersion + ".conf" + Environment.NewLine;
+            string configPath = LibFs.NormalizePath(MPhpSwitchConfig.apacheDir + "/conf/extra/httpd-php.conf");
+            string configPhpVersion = "Include conf/extra/httpd-php-" + MPhpSwitchConfig.phpVersion + ".conf" + Environment.NewLine;
 
             File.WriteAllText(@configPath, configPhpVersion);
-            Console.WriteLine("PHP version in Apache config file has been changed. (" + configPath + ")");
+            Console.WriteLine("  PHP version in Apache config file has been changed. (" + configPath + ")");
             Console.WriteLine();
         }
 

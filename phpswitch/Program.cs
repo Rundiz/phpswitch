@@ -32,15 +32,21 @@ namespace phpswitch
                 WindowsIdentity user = WindowsIdentity.GetCurrent();
                 WindowsPrincipal principal = new WindowsPrincipal(user);
                 return principal.IsInRole(WindowsBuiltInRole.Administrator);
-            } catch
+            }
+            catch
             {
                 return false;
             }
         }
 
 
+        /**
+         * <summary>Main program</summary>
+         */
         public static void Main(string[] args)
         {
+            AppConsole.DisplayProgramHeader();// program display header.
+
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
             if (args.Length == 0 || (args.Length >= 1 && HelpRequired(args[0])))
             {
@@ -48,30 +54,51 @@ namespace phpswitch
                 AppConsole.DisplayHelp();
             } else
             {
+                Models.PhpSwitchConfig phpSwitchConfig = new Models.PhpSwitchConfig();
+
                 // if running the code.
-                string runningDir = Directory.GetCurrentDirectory();// directory where this application is running from.
-                string phpDir = "";
-                string apacheDir = "";
+                phpSwitchConfig.runningDir = Directory.GetCurrentDirectory();// directory where this application is running from.
+                Models.PhpSwitchJSO phpSwitchJson;
+
+                // set command arguments to config value. --------------------------
+                phpSwitchConfig.phpVersion = args[0];
                 if (args.Length >= 2)
                 {
                     // if php versions folder was specified from command line.
                     // set php folder path.
-                    phpDir = args[1];
+                    phpSwitchConfig.phpDir = args[1];
                 }
                 if (args.Length >= 3)
                 {
                     // if apache folder was specified from command line.
                     // set apache folder path.
-                    apacheDir = args[2];
+                    phpSwitchConfig.apacheDir = args[2];
                 }
-                if (String.IsNullOrEmpty(phpDir) && String.IsNullOrEmpty(apacheDir) && File.Exists(runningDir + Path.DirectorySeparatorChar + "phpswitch.json"))
-                {
-                    Libraries.FileSystem LibFs = new Libraries.FileSystem();
-                    Libraries.PhpSwitchJSO phpSwitchJson = LibFs.loadJSON(runningDir + Path.DirectorySeparatorChar + "phpswitch.json");
-                    phpDir = phpSwitchJson.phpVersionsDir;
-                    apacheDir = phpSwitchJson.apacheDir;
+                // end set command arguments to config value. ----------------------
+
+                if (
+                    String.IsNullOrEmpty(phpSwitchConfig.phpDir) && 
+                    String.IsNullOrEmpty(phpSwitchConfig.apacheDir) && 
+                    File.Exists(phpSwitchConfig.runningDir + Path.DirectorySeparatorChar + "phpswitch.json")
+                ) {
+                    // if found phpswitch.json config file.
+                    Libraries.FileSystem LibFs = new Libraries.FileSystem(phpSwitchConfig);
+                    phpSwitchJson = LibFs.loadJSON(phpSwitchConfig.runningDir + Path.DirectorySeparatorChar + "phpswitch.json");
+                    phpSwitchConfig.additionalCopy = phpSwitchJson.additionalCopy;
+                    phpSwitchConfig.apacheUpdateConfig = phpSwitchJson.apacheUpdateConfig;
+                    phpSwitchConfig.webserverServiceName = phpSwitchJson.webserverServiceName;
+                    if (phpSwitchJson.phpVersionsDir != null)
+                    {
+                        Console.WriteLine("Found phpswitch.json file, it is now using configuration from this file.");
+                        Console.WriteLine();
+                        phpSwitchConfig.phpDir = phpSwitchJson.phpVersionsDir;
+                    }
+                    if (phpSwitchJson.apacheDir != null)
+                    {
+                        phpSwitchConfig.apacheDir = phpSwitchJson.apacheDir;
+                    }
                 }
-                FileSystem Fs = new FileSystem(args[0], phpDir, apacheDir);
+                FileCopier FileCopierClass = new FileCopier(phpSwitchConfig);
 
                 // check that this is running as admin.
                 if (IsRunAsAdmin() == false)
@@ -90,16 +117,26 @@ namespace phpswitch
                 // end check if running as admin.
 
                 // validate required folders.
-                Fs.ValidateRequiredPath();
+                FileCopierClass.ValidateRequiredPath();
 
-                // stop web server service.
-                Service.StopWebServerService();
+                if (Service.IsServiceExists(phpSwitchConfig.webserverServiceName))
+                {
+                    phpSwitchConfig.runServiceTask = true;
+                    // stop web server service.
+                    Service.StopWebServerService(phpSwitchConfig.webserverServiceName);
+                } else
+                {
+                    phpSwitchConfig.runServiceTask = false;
+                }
 
                 // copy files (also remove running version before copy).
-                FileSystem.StartCopyFiles();
+                FileCopierClass.StartCopyFiles();
 
-                // start web server service again.
-                Service.StartWebServerService();
+                if (phpSwitchConfig.runServiceTask == true)
+                {
+                    // start web server service again.
+                    Service.StartWebServerService(phpSwitchConfig.webserverServiceName);
+                }
 
                 // success message and exit.
                 AppConsole.SuccessExit();
