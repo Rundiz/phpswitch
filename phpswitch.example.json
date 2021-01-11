@@ -6,12 +6,12 @@
   "additionalCopy": {
     "7.0": [
       {
-        "copyFromDir": "D:\\my-work-spaces\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
+        "copyFromDir": "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
         "searchPattern": "CORE_*.dll",
         "copyTo": "."
       },
       {
-        "copyFromDir": "D:\\my-work-spaces\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
+        "copyFromDir": "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
         "searchPattern": "IM_*.dll",
         "copyTo": "."
       }
@@ -23,7 +23,7 @@
         "copyTo": "."
       },
       {
-        "copyFromDir": "D:\\my-work-spaces\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
+        "copyFromDir": "D:\\ImageMagick\\6.9.3-7-vc14-x64\\bin",
         "searchPattern": "IM_*.dll",
         "copyTo": "."
       }
