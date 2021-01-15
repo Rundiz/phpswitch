@@ -4,7 +4,7 @@ Switch between PHP versions using command line on Windows.
 
 ## Requirement:
 Windows 10 64 bit.<br>
-Linux 64 bit.
+Linux 64 bit.<br>
 Administrator privilege (Windows UAC or Linux sudo).
 
 ## Installation
