@@ -30,7 +30,7 @@ The **PHP versions folder** structure must follow this guide line.
 
 Each PHP versions folder must contain the files that you have downloaded from [php.net](https://php.net).
 
-##### php-running folder
+#### php-running folder
 The **php-running** folder is required to make PHP works (CLI and web server).<br>
 If you want to access `php` executable file, please add this **php-running** path into your **System variables** > **Path**.<br>
 To do this, run `rundll32.exe sysdm.cpl,EditEnvironmentVariables` in the command line. Edit **Path** in **System variables** and then add the full path to **php-running** folder.
