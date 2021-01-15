@@ -1,6 +1,6 @@
 ﻿# PHPSwitch
 
-Switch between PHP versions using command line on Windows.
+Switch between PHP versions using command line on Windows and Linux.
 
 ## Requirement:
 Windows 10 64 bit.<br>
