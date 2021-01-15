@@ -1,6 +1,6 @@
 {
   "phpVersionsDir": "D:\\wwwserver-x64\\php",
-  "phpRunningDir":  "D:\\wwwserver-x64\\php\\php-running",
+  "phpRunningDir": "D:\\wwwserver-x64\\php\\php-running",
   "webserverServiceName": [ "apache" ],
   "apacheDir": "D:\\wwwserver-x64\\apache\\Apache24",
   "apacheUpdateConfig": true,
@@ -30,5 +30,5 @@
       }
     ]
   },
-  "_comment": "Copy and paste this file into the folder you want to run the `phpswitch` command. Modify path above to your real path. Then run the `phpswitch` command."
+  "_comment": "Copy and paste this file into the folder where phpswitch application is. Modify path above to your real path. Then run the `phpswitch` command."
 }
