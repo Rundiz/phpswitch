@@ -2,6 +2,8 @@
 
 Switch between PHP versions using command line on Windows and Linux.
 
+![GitHub all releases](https://img.shields.io/github/downloads/rundiz/phpswitch/total)
+
 ## Requirement:
 Windows 10 64 bit.<br>
 Linux 64 bit.<br>
