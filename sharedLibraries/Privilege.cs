@@ -87,7 +87,7 @@ namespace sharedLibraries
                 Process.Start(Proc);
                 Environment.Exit(0);
             }
-            catch
+            catch (Exception ex)
             {
                 throw new Exception("Unable to raise the administrator privilege.");
             }

@@ -28,7 +28,14 @@ namespace killphp
             {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    Privilege.RelaunchAsAdmin("");
+                    try
+                    {
+                        Privilege.RelaunchAsAdmin("");
+                    } catch (Exception ex)
+                    {
+                        ConsoleStyle.ErrorMessage(ex.Message);
+                        Environment.Exit(5);
+                    }
                 }
                 else
                 {

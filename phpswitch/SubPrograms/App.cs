@@ -40,7 +40,15 @@ namespace phpswitch.SubPrograms
             {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    Privilege.RelaunchAsAdmin(phpversion, configJson, verbose);
+                    try
+                    {
+                        Privilege.RelaunchAsAdmin(phpversion, configJson, verbose);
+                    } 
+                    catch (Exception ex)
+                    {
+                        ConsoleStyle.ErrorMessage(ex.Message);
+                        Environment.Exit(5);
+                    }
                 }
                 else
                 {
