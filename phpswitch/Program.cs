@@ -18,22 +18,24 @@ namespace phpswitch
         /// <param name="args">Command line arguments.</param>
         static int Main(string[] args)
         {
-            var rootCommand = new RootCommand
-            {
-                new Argument<string>(
-                    "phpversion",
-                    "The PHP version to switch to."),
-                new Option<FileInfo>(
-                    "--config-json",
-                    "The path to phpswitch.json configuration file."),
-            };
+            var rootCommand = new RootCommand("The PHP switcher command line that will work on these tasks for you.");
+            var phpversion = new Argument<string>(
+                    name: "phpversion",
+                    description: "The PHP version to switch to."
+                );
+            rootCommand.AddArgument(phpversion);
 
-            // add option with alias.
-            var option = new Option(
-                "--verbose",
-                "Show verbose output");
-            option.AddAlias("-v");
-            rootCommand.Add(option);
+            var configjson = new Option<FileInfo>(
+                    name: "--config-json",
+                    description: "The path to phpswitch.json configuration file."
+                );
+            rootCommand.AddOption(configjson);
+            var verbose = new Option<bool>(
+                    name: "--verbose",
+                    description: "Show verbose output"
+                );
+            verbose.AddAlias("-v");
+            rootCommand.Add(verbose);
 
             rootCommand.Description = "The PHP switcher command line that will work on these tasks for you."
                 + "\n"
@@ -42,8 +44,11 @@ namespace phpswitch
                 + "  Start and stop web server service(s). (Optional)\n"
                 + "  Copy files depend on PHP version in JSON config file. (Optional)";
 
-            var method = typeof(App).GetMethod("Run");
-            rootCommand.Handler = CommandHandler.Create(method);
+            rootCommand.SetHandler((phpversion, configJson, verbose) => {
+                var app = new App();
+                app.Run(phpversion, configJson, verbose);
+            },
+            phpversion, configjson, verbose);
 
             // Parse the incoming args and invoke the handler
             return rootCommand.InvokeAsync(args).Result;

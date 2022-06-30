@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Version>2.0.0</Version>
     <Company>rundiz.com</Company>
     <Authors>Vee W</Authors>
@@ -13,12 +13,14 @@
     <!-- RuntimeIdentifier and SelfContained must come together but it cause build for linux failed. -->
     <PublishTrimmed>true</PublishTrimmed>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <AssemblyVersion>2.0.0.1</AssemblyVersion>
+    <FileVersion>2.0.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20574.7" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
-    <PackageReference Include="System.ServiceProcess.ServiceController" Version="5.0.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
