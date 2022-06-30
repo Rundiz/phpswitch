@@ -9,7 +9,7 @@ namespace phpswitch.Libraries
     /// <summary>
     /// Windows privilege user class.
     /// </summary>
-    class Privilege
+    public class Privilege
     {
 
 
