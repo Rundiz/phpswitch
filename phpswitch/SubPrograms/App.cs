@@ -1,10 +1,8 @@
-﻿using phpswitch.Models;
-using phpswitch.Libraries;
+﻿using sharedLibraries;
+using phpswitch.Models;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Security.Principal;
 
 namespace phpswitch.SubPrograms
 {
@@ -59,6 +57,10 @@ namespace phpswitch.SubPrograms
             this.MPHPSwitchConfig.Verbose = verbose;
 
             this.ConsoleStyle = new ConsoleStyle(this.MPHPSwitchConfig);
+
+            // start to kill php processes.
+            var processTask = new ProcessTask();
+            processTask.killPHP();
 
             FileCopier FileCopierClass = new FileCopier(this.MPHPSwitchConfig);
 

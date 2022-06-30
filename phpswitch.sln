@@ -1,14 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "phpswitch", "phpswitch\phpswitch.csproj", "{91007A88-E1BE-4B24-B8A4-852827600D92}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CAADA252-2D24-49AD-AE8D-B607E3F7A848} = {CAADA252-2D24-49AD-AE8D-B607E3F7A848}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21E1A26A-97AE-46B5-87EC-359EA2651A8B}"
 	ProjectSection(SolutionItems) = preProject
 		phpswitch.example.json = phpswitch.example.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "killphp", "killphp\killphp.csproj", "{8A2CD006-3654-4974-A608-3113585050B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sharedLibraries", "sharedLibraries\sharedLibraries.csproj", "{CAADA252-2D24-49AD-AE8D-B607E3F7A848}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +26,14 @@ Global
 		{91007A88-E1BE-4B24-B8A4-852827600D92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91007A88-E1BE-4B24-B8A4-852827600D92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91007A88-E1BE-4B24-B8A4-852827600D92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91007A88-E1BE-4B24-B8A4-852827600D92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2CD006-3654-4974-A608-3113585050B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2CD006-3654-4974-A608-3113585050B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2CD006-3654-4974-A608-3113585050B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAADA252-2D24-49AD-AE8D-B607E3F7A848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAADA252-2D24-49AD-AE8D-B607E3F7A848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAADA252-2D24-49AD-AE8D-B607E3F7A848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAADA252-2D24-49AD-AE8D-B607E3F7A848}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

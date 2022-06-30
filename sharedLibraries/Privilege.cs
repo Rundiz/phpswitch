@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace phpswitch.Libraries
+namespace sharedLibraries
 {
     /// <summary>
     /// Windows privilege user class.
@@ -59,9 +58,13 @@ namespace phpswitch.Libraries
         /// <param name="phpversion">The PHP version to switch to.</param>
         /// <param name="configJson">Path to phpswitch.json config file.</param>
         /// <param name="verbose">Verbose value will be true or false.</param>
-        public static void RelaunchAsAdmin(string phpversion, FileInfo configJson, bool verbose)
+        public static void RelaunchAsAdmin(string phpversion = "", FileInfo configJson = null, bool verbose = false)
         {
-            string argumentString = phpversion;
+            string argumentString = "";
+            if (String.IsNullOrEmpty(phpversion) == false)
+            {
+                argumentString += phpversion;
+            }
             if (String.IsNullOrEmpty(configJson?.FullName) == false)
             {
                 argumentString += " --config-json=\"" + configJson + "\"";
