@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "phpswitch": {
+      "commandName": "Project",
+      "commandLineArgs": "7.3 --config-json \"D:\\my-work-spaces\\wwwserver-x64\\phpswitch\\phpswitch.json\""
+    }
+  }
+}

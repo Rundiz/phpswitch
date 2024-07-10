@@ -12,7 +12,7 @@ namespace phpswitch.Models
         /// <summary>
         /// Additional copy tasks.
         /// </summary>
-        public Dictionary<string, object> additionalCopy
+        public Dictionary<string, object>? additionalCopy
         {
             get;
             set;
@@ -23,7 +23,7 @@ namespace phpswitch.Models
         /// <summary>
         /// Apache main folder path.
         /// </summary>
-        public string apacheDir
+        public string? apacheDir
         {
             get;
             set;
@@ -44,7 +44,7 @@ namespace phpswitch.Models
         /// PHP running folder path.
         /// This is where PHP executable will be run from CLI.
         /// </summary>
-        public string phpRunningDir
+        public string? phpRunningDir
         {
             get;
             set;
@@ -55,7 +55,7 @@ namespace phpswitch.Models
         /// PHP versions folder path.
         /// This folder must contain multiple PHP versions in each sub folder.
         /// </summary>
-        public string phpVersionsDir
+        public string? phpVersionsDir
         {
             get;
             set;
@@ -65,7 +65,7 @@ namespace phpswitch.Models
         /// <summary>
         /// Web server service name.
         /// </summary>
-        public string[] webserverServiceName
+        public string[]? webserverServiceName
         {
             get;
             set;

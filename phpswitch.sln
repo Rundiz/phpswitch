@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		phpswitch.example.json = phpswitch.example.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "killphp", "killphp\killphp.csproj", "{8A2CD006-3654-4974-A608-3113585050B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "killphp", "killphp\killphp.csproj", "{8A2CD006-3654-4974-A608-3113585050B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sharedLibraries", "sharedLibraries\sharedLibraries.csproj", "{CAADA252-2D24-49AD-AE8D-B607E3F7A848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sharedLibraries", "sharedLibraries\sharedLibraries.csproj", "{CAADA252-2D24-49AD-AE8D-B607E3F7A848}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
